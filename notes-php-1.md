@@ -1,5 +1,8 @@
 # Platzi Curso fundamentos de PHP
 
+##HOLA MUNDO
+Hola mi pez!
+
 ## Herreamientas para seguir el curso
 PHP es un lenguaje del lado del servidor web, para desarrollar aquí  debemos convertir nuestro en un servidor web sin importar el metodo ni la manera de hacerlo.
 
