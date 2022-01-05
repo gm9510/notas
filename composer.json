@@ -1,0 +1,18 @@
+{
+    "name": "gustavo/notas",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gustavo Prometeo",
+            "email": "gm9510@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "notas\\": "./"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
