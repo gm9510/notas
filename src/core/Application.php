@@ -10,14 +10,19 @@ namespace notas\src\core;
 class Application 
 {
     public Router $router;
+    public Request $request;
     public function __construct() 
     {
-        $this->router = new Router();
-        
+        $this->request = new Request();
+        $this->router = new Router($this->request);
     }
 
     public function run() 
     {
-        echo "<h1>HOLA desde App</h1>";
+        $path = $this->router->resolve();
+
+        echo "<h2>";
+        echo var_dump( $path );
+        echo "</h2>";
     }
 }
