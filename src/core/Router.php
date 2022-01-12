@@ -6,16 +6,23 @@ class Router
 {
 
     public Request $request;
+    public Response $response;
     protected array $routes = [];
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, Response $response)
     {
-        $this->request = new Request();
+        $this->request = $request;
+        $this->response = $response;
     }
 
     public function get($path,$callback) 
     {
         $this->routes['get'][$path] = $callback;
+    }
+
+    public function post($path,$callback) 
+    {
+        $this->routes['post'][$path] = $callback;
     }
 
     public function resolve()
@@ -25,20 +32,27 @@ class Router
 
         $callback = $this->routes[$method][$path] ?? false;
         if( !$callback ) {
-            return 'not found';
+            $this->response->setStatusCode(404);
+            return $this->renderView('404');
         }
 
         if(is_string($callback)) {
+            $this->response->setStatusCode(200);
             return $this->renderView($callback);
         }
 
-        return call_user_func($callback);
+        if( is_array($callback) ) {
+            $callback[0] = new $callback[0]();
+        }
+
+        $this->response->setStatusCode(200);
+        return call_user_func($callback, $this->request);
     }
 
-    public function renderView($view)
+    public function renderView($view,$params = [])
     {
         $layoutContent = $this->layoutContent();
-        $viewContent = $this->renderOnlyView($view);
+        $viewContent = $this->renderOnlyView($view,$params);
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
@@ -50,7 +64,10 @@ class Router
 
     }
 
-    protected function renderOnlyView($view) {
+    protected function renderOnlyView($view,$params) {
+        foreach($params as $key => $value) {
+            $$key = $value;
+        }
         ob_start();
         include_once Application::$ROOT_DIR."/views/{$view}.php";
         return ob_get_clean();
