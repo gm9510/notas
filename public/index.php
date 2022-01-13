@@ -14,5 +14,23 @@ $app->router->post('/contact', [
     notas\src\controllers\SiteController::class, 
     'handleContact'
 ]);
+
+
+$app->router->get('/login', [ 
+    notas\src\controllers\AuthController::class, 
+    'login'
+]);
+$app->router->post('/login', [ 
+    notas\src\controllers\AuthController::class, 
+    'login'
+]);
+$app->router->get('/register', [ 
+    notas\src\controllers\AuthController::class, 
+    'register'
+]);
+$app->router->post('/register', [ 
+    notas\src\controllers\AuthController::class, 
+    'register'
+]);
 $app->run();
 
