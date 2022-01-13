@@ -4,7 +4,7 @@ namespace notas\src\controllers;
 
 use notas\src\core\Controller;
 use notas\src\core\Request;
-use notas\src\model\RegisterModel;
+use notas\src\models\RegisterModel;
 
 class AuthController extends Controller
 {
@@ -16,10 +16,28 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        $registerModel = new RegisterModel();
+
+        $this->setLayout('auth');
         if( $request->isPost() ) {
-            return 'Handle submitted data';
+
+            $body = $request->getBody();
+            $registerModel->loadData($body);
+
+            echo var_dump($registerModel);
+            exit;
+
+            if( $registerModel->validate() && $registerModel->register()) {
+                return 'Success';
+            }
+
+            return $this->render('register', [
+                'model' => $registerModel
+            ]);
         }
 
-        return $this->render('register');
+        return $this->render('register', [
+            'model' => $registerModel
+        ]);
     }
 }

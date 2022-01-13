@@ -9,7 +9,10 @@ $app->router->get('/', [
     notas\src\controllers\SiteController::class, 
     'home'
 ]);
-$app->router->get('/contact', 'contact');
+$app->router->get('/contact', [
+    notas\src\controllers\SiteController::class, 
+    'contact'
+]);
 $app->router->post('/contact', [ 
     notas\src\controllers\SiteController::class, 
     'handleContact'
