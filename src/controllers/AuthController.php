@@ -24,8 +24,6 @@ class AuthController extends Controller
             $body = $request->getBody();
             $registerModel->loadData($body);
 
-            echo var_dump($registerModel);
-            exit;
 
             if( $registerModel->validate() && $registerModel->register()) {
                 return 'Success';

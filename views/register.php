@@ -1,31 +1,28 @@
 <?php
 
+use notas\src\core\form\Form;
+
+$form = new Form();
+
 ?>
 
 <h1> Register </h1>
 
-<form action="" method="POST">
-  <div class="form-group">
-    <label for="InputFirstname">Firstname</label>
-    <input type="text" name="firstname" class="form-control" id="InputFirstname" aria-describedby="Firstname">
-  </div>
-  <div class="form-group">
-    <label for="InputLastname">Lastname</label>
-    <input type="text" name="lastname" class="form-control" id="InputLastname" aria-describedby="Lastname">
-  </div>
-  <div class="form-group">
-    <label for="InputEmail">Email address</label>
-    <input type="email" name="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div class="form-group">
-    <label for="InputPassword">Password</label>
-    <input type="password" name="password" class="form-control" id="InputPassword">
-  </div>
-  <div class="form-group">
-    <label for="InputPasswordRepeat">Confirm Password</label>
-    <input type="password" name="confirmPassword" class="form-control" id="InputPasswordRepeat">
-  </div>
+<?php $form = Form::begin('',"post") ?>
+
+<?php $form = Form::begin('', 'post') ?>
+    <div class="row">
+        <div class="col">
+        <?php echo $form->field($model, 'firstname') ?>
+        </div>
+        <div class="col">
+        <?php echo $form->field($model, 'lastname') ?>
+        </div>
+    </div>
+
+    <?php echo $form->field($model, 'email') ?>
+    <?php echo $form->field($model, 'password')->passwordField() ?>
+    <?php echo $form->field($model, 'confirmPassword')->passwordField() ?>
 
   <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<?php Form::end() ?>
