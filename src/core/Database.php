@@ -73,4 +73,9 @@ class Database
     {
         echo '['.date('Y-m-d H:i:s').'] - '.$message.PHP_EOL;
     }
+
+    public function prepare(string $sql) 
+    {
+        return Application::$app->db->pdo->prepare($sql);
+    }
 }
