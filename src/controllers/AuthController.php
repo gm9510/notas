@@ -4,6 +4,7 @@ namespace notas\src\controllers;
 
 use notas\src\core\Controller;
 use notas\src\core\Request;
+use notas\src\core\Application;
 use notas\src\models\UserModel;
 
 class AuthController extends Controller
@@ -26,7 +27,9 @@ class AuthController extends Controller
 
 
             if( $user->validate() && $user->save()) {
+                Application::$app->session->setFlash('success', 'Thanks for registering');
                 Application::$app->response->redirect('/');
+                exit;
             }
 
             return $this->render('register', [
