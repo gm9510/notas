@@ -47,5 +47,10 @@ $app->router->post('/register', [
     notas\src\controllers\AuthController::class, 
     'register'
 ]);
+$app->router->get('/logout', [ 
+    notas\src\controllers\AuthController::class, 
+    'logout'
+]);
+
 $app->run();
 

@@ -1,10 +1,10 @@
 <?php
 
 namespace notas\src\models;
-use notas\src\core\DbModel;
+use notas\src\core\UserModel as UserBase;
 
 
-class UserModel extends DbModel
+class UserModel extends UserBase
 {
     const STATUS_INACTIVA = 0;
     const STATUS_ACTIVE = 1;
@@ -65,5 +65,10 @@ class UserModel extends DbModel
     public function attributes(): array
     {
         return ['firstname', 'lastname', 'email', 'password', 'status'];
+    }
+
+    public function getDisplayName(): string
+    {
+        return $this->firstname .' '. $this->lastname;
     }
 }
