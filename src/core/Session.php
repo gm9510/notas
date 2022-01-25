@@ -32,7 +32,7 @@ class Session
         $_SESSION[self::FLASH_KEY] = $flashMessages;
     }
 
-    public function setFlash($key, $message)
+    public function setFlash($key, $message): void
     {
         $_SESSION[self::FLASH_KEY][$key] = [
             'value' => $message,
@@ -40,8 +40,23 @@ class Session
         ];
     }
 
-    public function getFlash($key)
+    public function getFlash($key): string
     {
-        return $_SESSION[self::FLASH_KEY][$key]['value'];
+        return $_SESSION[self::FLASH_KEY][$key]['value'] ?? '';
+    }
+
+    public function set($key, $value)
+    {
+        $_SESSION[$key] = $value;
+    }
+
+    public function get(string $key)
+    {
+        return $_SESSION[$key] ?? false;
+    }
+
+    public function remove($key)
+    {
+        unset($_SESSION[$key]);
     }
 }

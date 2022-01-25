@@ -8,8 +8,6 @@ $form = new Form();
 
 <h1> Register </h1>
 
-<?php $form = Form::begin('',"post") ?>
-
 <?php $form = Form::begin('', 'post') ?>
     <div class="row">
         <div class="col">
