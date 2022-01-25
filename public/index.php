@@ -30,6 +30,11 @@ $app->router->post('/contact', [
     'handleContact'
 ]);
 
+$app->router->get('/profile', [
+    notas\src\controllers\SiteController::class,
+    'profile'
+]);
+
 
 $app->router->get('/login', [ 
     notas\src\controllers\AuthController::class, 
@@ -51,6 +56,7 @@ $app->router->get('/logout', [
     notas\src\controllers\AuthController::class, 
     'logout'
 ]);
+
 
 $app->run();
 

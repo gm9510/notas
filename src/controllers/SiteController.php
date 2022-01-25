@@ -2,11 +2,17 @@
 
 namespace notas\src\controllers;
 
-use  notas\src\core\Controller;
-use  notas\src\core\Request;
+use notas\src\core\Controller;
+use notas\src\core\Request;
+use notas\src\core\middlewares\AuthMiddleware;
 
 class SiteController extends Controller
 {
+    public function __construct()
+    {
+        $this->registerMiddleware(new AuthMiddleware(['profile']));
+    }
+
     public function home() {
         $params = [
             'name' => "EvilTomato"
@@ -29,5 +35,9 @@ class SiteController extends Controller
         
         return $this->render('contact');
     }
-}
 
+    public function profile(Request $request)
+    {
+        return $this->render('profile');
+    }
+}

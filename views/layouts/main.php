@@ -42,7 +42,7 @@ use notas\src\core\Application;
         <?php else: ?>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a href="#" class="font-weight-bold nav-link disabled">Welcome <?php echo Application::$app->user->getDisplayName() ?></a>
+            <a href="/profile" class="font-weight-bold nav-link">Welcome <?php echo Application::$app->user->getDisplayName() ?></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>

@@ -20,7 +20,7 @@ class Application
     public ?DbModel $user;
 
     public static Application $app;
-    public Controller $controller;
+    public ?Controller $controller = null;
     public function __construct($rootPath, array $config)
     {
         $this->userClass = $config['userClass'];
@@ -44,7 +44,14 @@ class Application
 
     public function run() 
     {
-        echo $this->router->resolve();
+        try {
+            echo $this->router->resolve();
+        } catch(\Exception $error) {
+            $this->response->setStatusCode($error->getCode());
+            echo $this->router->renderView('error',[
+                'exception' => $error
+            ]);
+        }
     }
 
     public function login(DbModel $user)
